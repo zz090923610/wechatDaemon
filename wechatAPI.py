@@ -2,6 +2,7 @@
 
 
 import itchat
+import os
 
 from vars import qr_text_dir
 
@@ -28,6 +29,7 @@ class WechatAPI:
         return ''
 
     def send_file(self, path, to):
+        path = os.path.expanduser(path)
         to = self.get_friend(to)
         if to != '':
             print(self.hdl.send('@fil@%s' % path, toUserName=to))
