@@ -8,7 +8,7 @@ from vars import cmd_file_dir
 from wechatAPI import WechatAPI
 
 api = WechatAPI()
-
+# DEPENDENCY( pid )
 
 def do_exit(sig, stack):
     raise SystemExit('Exiting')
