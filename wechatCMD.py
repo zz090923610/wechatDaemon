@@ -1,8 +1,6 @@
 import pickle
 import sys
-
 import time
-
 import CmdQR
 from vars import pid_file, cmd_file_dir, qr_text_dir
 import os
@@ -47,18 +45,6 @@ def send_msg(msg, to):
     send_signal()
 
 
-def get_friend(target):
-    with open(cmd_file_dir, 'wb') as f:
-        pickle.dump({"task": "get_friend", "target": target}, f)
-    send_signal()
-
-
-def reset():
-    with open(cmd_file_dir, 'wb') as f:
-        pickle.dump({"task": "reset"}, f)
-    send_signal()
-
-
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         exit()
@@ -70,9 +56,5 @@ if __name__ == '__main__':
                 send_msg(sys.argv[2], sys.argv[3])
             elif sys.argv[1] == '-f':
                 send_file(sys.argv[2], sys.argv[3])
-            elif sys.argv[1] == '-g':
-                get_friend(sys.argv[2])
-            elif sys.argv[1] == '-r':
-                reset()
         except Exception as e:
             print(e)

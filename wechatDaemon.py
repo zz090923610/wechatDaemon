@@ -8,6 +8,8 @@ from vars import cmd_file_dir
 from wechatAPI import WechatAPI
 
 api = WechatAPI()
+
+
 # DEPENDENCY( pid )
 
 def do_exit(sig, stack):
@@ -19,14 +21,9 @@ def start_task(sig, stack):
     if cmd['task'] == "login":
         api.login()
     elif cmd['task'] == "send_file":
-        api.send_file(cmd["path"], cmd["to"])
-
+        api.append_task("file", cmd["path"], cmd["to"])
     elif cmd['task'] == "msg":
-        api.send_msg(cmd["msg"], cmd["to"])
-    elif cmd['task'] == "get_friend":
-        api.get_friend(cmd['target'])
-    elif cmd['task'] == "reset":
-        api.reset()
+        api.append_task("msg", cmd["msg"], cmd["to"])
 
 
 def read_cmd():
