@@ -16,6 +16,7 @@ class WechatAPI:
     def __init__(self):
         self.options = webdriver.ChromeOptions()
         self.options.add_argument('headless')
+        self.options.add_argument("--mute-audio")
         self.driver = webdriver.Chrome("chromedriver", chrome_options=self.options)
         self.request_queue = Queue()
         self.online = False
@@ -27,6 +28,8 @@ class WechatAPI:
             pass
 
     def login(self):
+        self.driver.close()
+        self.driver = webdriver.Chrome("chromedriver", chrome_options=self.options)
         self.driver.get('https://wx.qq.com/')
         login_cred = self.driver.find_element_by_class_name("qrcode").find_element_by_class_name("img").get_attribute(
             "mm-src").split("/")[-1]
